@@ -16,9 +16,9 @@ df = df.drop(df.index[0])
 print(df.head())
 
 inputs = []
-interval = 500
-nums = 1000
-start = 300000
+interval = 5000
+nums = 400
+start = 400000
 
 for i in range(nums):
     time_points = df['Time'].iloc[start+i*interval:start+(i+1)*interval].values
