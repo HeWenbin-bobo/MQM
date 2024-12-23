@@ -5,9 +5,15 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+import os
+from util.utils import extract_zip_volumes
+
+# WinRAR 可执行文件路径 (确保路径正确)
+winrar_path = r'D:\Winrar\WinRAR.exe'
+extract_zip_volumes('./WJC_test/force.xlsx', winrar_path=winrar_path)
 
 # 读取Excel文件
-df = pd.read_excel('force.xlsx')
+df = pd.read_excel('./WJC_test/force.xlsx')
 
 df = df.rename(columns={'0W': 'Sum'})
 df = df.drop(df.index[0])
@@ -16,7 +22,7 @@ df = df.drop(df.index[0])
 print(df.head())
 
 inputs = []
-interval = 5000
+interval = 400
 nums = 400
 start = 400000
 
@@ -49,3 +55,5 @@ y_pred = rf_classifier.predict(X_test)
 # 评估模型性能
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy}")
+
+os.remove('./WJC_test/force.xlsx')
